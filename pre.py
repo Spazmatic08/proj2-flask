@@ -2,6 +2,7 @@
 Test program for pre-processing schedule
 """
 import arrow
+import re
 
 base = arrow.now()
 
@@ -41,9 +42,15 @@ def process(raw):
             if entry:
                 cooked.append(entry)
                 entry = { }
+            pdate = base.replace(weeks =+ int(re.search(r'\d+', content).group()) - 1)
+            cweek = arrow.Arrow.range('week', base, arrow.now()).__len__()
+            print(cweek)
+            pdate = pdate.format('MM/DD/YYYY')
             entry['topic'] = ""
             entry['project'] = ""
             entry['week'] = content
+            entry['date'] = pdate
+            entry['current'] = cweek == int(content)
 
         elif field == 'topic' or field == 'project':
             entry[field] = content
@@ -55,7 +62,6 @@ def process(raw):
         cooked.append(entry)
 
     return cooked
-
 
 def main():
     f = open("data/schedule.txt")
