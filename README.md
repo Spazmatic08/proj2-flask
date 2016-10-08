@@ -35,4 +35,3 @@ absolute majority of the code present is their work. If you have questions, you
 will find more success looking to those working on that branch.
 
 URL: https://github.com/UO-CIS-322/proj2-flask
-they would be the ones to ask it of.
